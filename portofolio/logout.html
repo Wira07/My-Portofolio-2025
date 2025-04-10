@@ -17,6 +17,7 @@
         --hover-bg: #e2e6ea;
         --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
         --danger-gradient: linear-gradient(90deg, #ff6b6b, #ff5252);
+        --success-gradient: linear-gradient(90deg, #20bf55, #01baef);
         --menu-icon-size: 20px;
       }
 
@@ -24,52 +25,158 @@
         background-color: var(--main-bg);
         color: var(--text-color);
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        overflow-x: hidden;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        background-image: url("https://cdnjs.cloudflare.com/ajax/libs/img/blurred-code-bg.svg");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(67, 97, 238, 0.8), rgba(255, 119, 0, 0.6));
+        z-index: -1;
+      }
+
+      .background-shapes {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .shape {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .shape-1 {
+        width: 400px;
+        height: 400px;
+        top: -200px;
+        right: -100px;
+        animation: float 25s infinite alternate;
+      }
+
+      .shape-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        left: -50px;
+        animation: float 18s infinite alternate-reverse;
+      }
+
+      .shape-3 {
+        width: 200px;
+        height: 200px;
+        top: 40%;
+        right: 10%;
+        animation: float 20s infinite alternate-reverse;
+      }
+
+      .shape-4 {
+        width: 150px;
+        height: 150px;
+        bottom: 20%;
+        right: 15%;
+        animation: float 22s infinite alternate;
+      }
+
+      .floating-code {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.1);
+        font-family: monospace;
+        font-size: 2rem;
+        pointer-events: none;
+        white-space: nowrap;
+        opacity: 0.6;
+      }
+
+      .code-1 {
+        top: 15%;
+        left: 5%;
+        animation: codeSlide 30s linear infinite;
+      }
+
+      .code-2 {
+        top: 35%;
+        left: -5%;
+        animation: codeSlide 35s linear infinite;
+        animation-delay: 5s;
+      }
+
+      .code-3 {
+        bottom: 25%;
+        left: 10%;
+        animation: codeSlide 40s linear infinite;
+        animation-delay: 8s;
+      }
+
+      @keyframes codeSlide {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100vw);
+        }
       }
 
       .logout-container {
-        max-width: 800px;
-        width: 90%;
-        background-color: var(--card-bg);
+        width: 1000px;
+        max-width: 90%;
+        background-color: rgba(255, 255, 255, 0.9);
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         display: flex;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
         opacity: 0;
         transform: translateY(30px);
         animation: fadeInUp 0.8s ease forwards;
       }
 
       .logout-sidebar {
-        width: 40%;
+        width: 45%;
         background: var(--active-gradient);
-        padding: 40px 30px;
+        padding: 40px;
         color: white;
         position: relative;
-        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        overflow: hidden;
       }
 
       .logout-sidebar::before {
         content: "";
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-        animation: pulse 15s infinite linear;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url("/api/placeholder/800/1200");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        z-index: 0;
       }
 
       .logout-content {
-        width: 60%;
-        padding: 40px;
+        width: 55%;
+        padding: 50px;
         position: relative;
       }
 
@@ -77,6 +184,8 @@
         display: flex;
         align-items: center;
         margin-bottom: 40px;
+        position: relative;
+        z-index: 1;
       }
 
       .logo-icon {
@@ -99,47 +208,41 @@
       }
 
       .logout-message {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
       }
 
       .logout-greeting {
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 700;
         margin-bottom: 15px;
+        position: relative;
       }
 
-      .action-buttons {
-        margin-top: 30px;
+      .typing-animation::after {
+        content: "|";
+        animation: blink 1s infinite step-end;
       }
 
-      .btn {
-        padding: 12px 25px;
-        border-radius: 30px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .btn-primary {
-        background: var(--active-gradient);
-        border: none;
-      }
-
-      .btn-danger {
-        background: var(--danger-gradient);
-        border: none;
-      }
-
-      .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      @keyframes blink {
+        from,
+        to {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
       }
 
       .avatar-group {
         display: flex;
         align-items: center;
         margin-top: 40px;
+        position: relative;
+        z-index: 1;
       }
 
       .user-avatar {
@@ -202,6 +305,8 @@
       .social-links {
         display: flex;
         margin-top: 30px;
+        position: relative;
+        z-index: 1;
       }
 
       .social-btn {
@@ -223,41 +328,31 @@
         transform: translateY(-3px);
       }
 
-      .floating-shapes {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        z-index: -1;
+      .action-buttons {
+        margin-top: 30px;
       }
 
-      .shape {
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
+      .btn {
+        padding: 12px 25px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
-      .shape-1 {
-        width: 120px;
-        height: 120px;
-        top: -30px;
-        right: -30px;
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
       }
 
-      .shape-2 {
-        width: 80px;
-        height: 80px;
-        bottom: 40%;
-        left: -20px;
+      .btn-danger {
+        background: var(--danger-gradient);
+        border: none;
       }
 
-      .shape-3 {
-        width: 60px;
-        height: 60px;
-        bottom: -20px;
-        right: 30%;
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
       }
 
       .confirmation-modal {
@@ -323,7 +418,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--card-bg);
+        background-color: rgba(255, 255, 255, 0.95);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -343,7 +438,7 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background: var(--active-gradient);
+        background: var(--success-gradient);
         color: white;
         display: flex;
         align-items: center;
@@ -397,30 +492,41 @@
 
       @keyframes float {
         0% {
-          transform: translateY(0);
+          transform: translateY(0) rotate(0deg);
         }
         50% {
-          transform: translateY(-10px);
+          transform: translateY(-20px) rotate(5deg);
         }
         100% {
-          transform: translateY(0);
+          transform: translateY(0) rotate(0deg);
         }
       }
 
       .floating-animation {
-        animation: float 5s ease-in-out infinite;
+        animation: float 6s ease-in-out infinite;
       }
 
-      .fade-in-down {
-        animation: fadeInDown 0.5s ease forwards;
-        animation-delay: 0.2s;
+      .fade-in-delay {
         opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
       }
 
-      @keyframes fadeInDown {
+      .fade-in-delay-1 {
+        animation-delay: 0.3s;
+      }
+
+      .fade-in-delay-2 {
+        animation-delay: 0.6s;
+      }
+
+      .fade-in-delay-3 {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(-20px);
+          transform: translateY(10px);
         }
         to {
           opacity: 1;
@@ -428,40 +534,30 @@
         }
       }
 
-      .quick-links > div {
-        opacity: 0;
-        transform: translateX(-20px);
+      .login-btn-animation {
+        position: relative;
+        overflow: hidden;
       }
 
-      .quick-links > div:nth-child(1) {
-        animation: fadeInRight 0.5s ease forwards;
-        animation-delay: 0.3s;
+      .login-btn-animation::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s;
       }
 
-      .quick-links > div:nth-child(2) {
-        animation: fadeInRight 0.5s ease forwards;
-        animation-delay: 0.4s;
+      .login-btn-animation:hover::before {
+        left: 100%;
       }
 
-      .quick-links > div:nth-child(3) {
-        animation: fadeInRight 0.5s ease forwards;
-        animation-delay: 0.5s;
-      }
-
-      @keyframes fadeInRight {
-        from {
-          opacity: 0;
-          transform: translateX(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @media (max-width: 767px) {
+      @media (max-width: 991px) {
         .logout-container {
           flex-direction: column;
+          max-width: 95%;
         }
 
         .logout-sidebar,
@@ -470,17 +566,27 @@
         }
 
         .logout-sidebar {
-          padding: 30px 20px;
-        }
-
-        .logout-content {
-          padding: 30px 20px;
+          padding: 30px;
         }
       }
     </style>
   </head>
   <body>
+    <!-- Background Elements -->
+    <div class="background-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+
+    <div class="floating-code code-1">&lt;div class="portfolio"&gt;&lt;/div&gt;</div>
+    <div class="floating-code code-2">function logout() { return true; }</div>
+    <div class="floating-code code-3">const developer = new FullStack();</div>
+
+    <!-- Logout Container -->
     <div class="logout-container">
+      <!-- Sidebar Section -->
       <div class="logout-sidebar">
         <div>
           <div class="logo">
@@ -514,32 +620,27 @@
             <i class="fas fa-envelope"></i>
           </a>
         </div>
-
-        <div class="floating-shapes">
-          <div class="shape shape-1"></div>
-          <div class="shape shape-2"></div>
-          <div class="shape shape-3"></div>
-        </div>
       </div>
 
+      <!-- Logout Form Section -->
       <div class="logout-content">
-        <h1 class="logout-greeting fade-in-down">Sampai Jumpa!</h1>
-        <p class="fade-in-down">Apakah Anda yakin ingin keluar dari akun? Anda dapat login kembali kapan saja.</p>
+        <h1 class="logout-greeting typing-animation fade-in-delay fade-in-delay-1">Sampai Jumpa!</h1>
+        <p class="fade-in-delay fade-in-delay-2">Apakah Anda yakin ingin keluar dari akun? Anda dapat login kembali kapan saja.</p>
 
         <div class="quick-links">
-          <div>
+          <div class="fade-in-delay fade-in-delay-1">
             <a href="index.html" class="quick-link">
               <i class="fas fa-home"></i>
               Kembali ke Halaman Utama
             </a>
           </div>
-          <div>
+          <div class="fade-in-delay fade-in-delay-2">
             <a href="projects.html" class="quick-link">
               <i class="fas fa-project-diagram"></i>
               Lihat Semua Projek
             </a>
           </div>
-          <div>
+          <div class="fade-in-delay fade-in-delay-3">
             <a href="contact.html" class="quick-link">
               <i class="fas fa-envelope"></i>
               Hubungi Saya
@@ -547,12 +648,12 @@
           </div>
         </div>
 
-        <div class="action-buttons fade-in-down">
-          <button id="logout-btn" class="btn btn-danger me-2">
+        <div class="action-buttons fade-in-delay fade-in-delay-3">
+          <button id="logout-btn" class="btn btn-danger me-2 login-btn-animation">
             <i class="fas fa-sign-out-alt me-2"></i>
             Keluar
           </button>
-          <button id="cancel-btn" class="btn btn-primary">
+          <button id="cancel-btn" class="btn btn-primary login-btn-animation">
             <i class="fas fa-arrow-left me-2"></i>
             Batal
           </button>
@@ -570,8 +671,8 @@
         <p>Apakah Anda yakin ingin keluar dari akun portfolio Anda?</p>
 
         <div class="modal-actions">
-          <button id="confirm-logout" class="btn btn-danger">Ya, Keluar</button>
-          <button id="cancel-logout" class="btn btn-primary">Batal</button>
+          <button id="confirm-logout" class="btn btn-danger login-btn-animation">Ya, Keluar</button>
+          <button id="cancel-logout" class="btn btn-primary login-btn-animation">Batal</button>
         </div>
       </div>
     </div>
@@ -583,7 +684,7 @@
       </div>
       <h2 class="success-text">Berhasil Keluar</h2>
       <p class="redirect-text">Anda akan dialihkan ke halaman login dalam <span class="countdown" id="countdown">5</span> detik</p>
-      <button id="login-now" class="btn btn-primary">Login Sekarang</button>
+      <button id="login-now" class="btn btn-primary login-btn-animation">Login Sekarang</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -597,6 +698,31 @@
       const logoutSuccess = document.getElementById("logoutSuccess");
       const loginNow = document.getElementById("login-now");
       const countdown = document.getElementById("countdown");
+      const typingElement = document.querySelector(".typing-animation");
+
+      // Function to simulate typing
+      function typeText(el, text, i = 0) {
+        if (i === 0) {
+          el.textContent = "";
+        }
+
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          setTimeout(() => typeText(el, text, i + 1), 80);
+        }
+      }
+
+      // Start typing after page loads
+      window.addEventListener("load", () => {
+        typingElement.classList.remove("typing-animation");
+        setTimeout(() => {
+          const textToType = "Sampai Jumpa!";
+          typeText(typingElement, textToType);
+          setTimeout(() => {
+            typingElement.classList.add("typing-animation");
+          }, textToType.length * 80 + 500);
+        }, 500);
+      });
 
       // Show confirmation modal
       logoutBtn.addEventListener("click", function () {
@@ -617,11 +743,15 @@
       confirmLogout.addEventListener("click", function () {
         confirmationModal.classList.remove("show");
 
+        // Show loading on button
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+        this.disabled = true;
+
         // Show success screen after slight delay
         setTimeout(() => {
           logoutSuccess.classList.add("show");
           startCountdown();
-        }, 300);
+        }, 1000);
       });
 
       // Login now button
@@ -644,6 +774,25 @@
           }
         }, 1000);
       }
+
+      // Create floating code elements dynamically
+      function createFloatingCode() {
+        const codeLines = ["import React from 'react';", "const Skills = ['HTML', 'CSS', 'JavaScript'];", "export default Portfolio;", "addEventListener('load', init);", "console.log('Goodbye World!');"];
+
+        for (let i = 0; i < 5; i++) {
+          const code = document.createElement("div");
+          code.className = "floating-code";
+          code.textContent = codeLines[i % codeLines.length];
+          code.style.top = `${10 + Math.random() * 80}%`;
+          code.style.left = `${-20 - Math.random() * 20}%`;
+          code.style.animationDuration = `${25 + Math.random() * 20}s`;
+          code.style.animationDelay = `${Math.random() * 5}s`;
+          document.querySelector(".background-shapes").appendChild(code);
+        }
+      }
+
+      // Uncomment to create more floating code elements
+      // createFloatingCode();
     </script>
   </body>
 </html>
